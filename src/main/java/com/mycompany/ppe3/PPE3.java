@@ -200,10 +200,20 @@ public class PPE3 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList2);
 
         jButton5.setText("Afficher clients");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("jButton6");
+        jButton6.setText("Afficher statistiques client");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("jButton7");
+        jButton7.setText("Ajouter Client");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -222,18 +232,17 @@ public class PPE3 extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(55, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7)
+                .addGap(48, 48, 48))
         );
 
         jTabbedPane1.addTab("Clients", jPanel3);
@@ -274,10 +283,8 @@ public class PPE3 extends javax.swing.JFrame {
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Produit");		// (a et b)
             // on attend au max 1 Tuple !!!!!
-            if (lesTuples.next()) { 	// (c)
+            while(lesTuples.next()) { 	// (c)
                 leModel.addElement(lesTuples.getString("nomproduit"));
-            } else {
-
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
@@ -360,6 +367,54 @@ if (this.connecte != 0) {
 DetailProd detail = new DetailProd(this, true);
 detail.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+if (this.connecte != 0) {    
+        DefaultListModel leModel= (DefaultListModel)jList2.getModel();
+        try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Client where '" + jList2.getSelectedValue() +"' ");		// (a et b)
+            // on attend au max 1 Tuple !!!!!
+            if (lesTuples.next()) { 	
+                leModel.clear();
+                leModel.addElement("Nom: " + lesTuples.getString("nomClient"));
+                leModel.addElement("Adresse: " + lesTuples.getString("adresseClient"));
+                leModel.addElement("Tel:"+ lesTuples.getString("numClient"));
+            } else {
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    else {
+        JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+if (this.connecte != 0) {    
+        DefaultListModel leModel= (DefaultListModel) jList2.getModel();
+        leModel.clear();
+           try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Client");		// (a et b)
+            // on attend au max 1 Tuple !!!!!
+            if (lesTuples.next()) { 	// (c)
+                leModel.addElement(lesTuples.getString("nomClient"));
+            } else {
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    else {
+        JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
    
     
     /**
