@@ -34,8 +34,8 @@ public class PPE3 extends javax.swing.JFrame {
         else {
             System.out.println("Erreur de connexion à la base de donnée, veuillez rééssayer.");
         }
-        jLabel4.setText("Non connecté.");
-        jButton4.setVisible(false);
+        jLabelEtat.setText("Non connecté.");
+        jButtonAjouterProd.setVisible(false);
         
         
     }
@@ -64,18 +64,18 @@ public class PPE3 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonAfficherProd = new javax.swing.JButton();
+        jButtonAjouterProd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        jButtonModifProd = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelEtat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,27 +144,27 @@ public class PPE3 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Connexion", jPanel1);
 
-        jButton2.setText("Afficher Produits");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAfficherProd.setText("Afficher Produits");
+        jButtonAfficherProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAfficherProdActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Ajouter Produit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAjouterProd.setText("Ajouter Produit");
+        jButtonAjouterProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonAjouterProdActionPerformed(evt);
             }
         });
 
         jTable2.setModel(new DefaultTableModel());
         jScrollPane1.setViewportView(jTable2);
 
-        jButton6.setText("Modifier Produit");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModifProd.setText("Modifier Produit");
+        jButtonModifProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonModifProdActionPerformed(evt);
             }
         });
 
@@ -175,9 +175,9 @@ public class PPE3 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAfficherProd, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(jButtonAjouterProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModifProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addContainerGap())
@@ -188,11 +188,11 @@ public class PPE3 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonAfficherProd)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonModifProd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4))
+                        .addComponent(jButtonAjouterProd))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -258,7 +258,7 @@ public class PPE3 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clients", jPanel3);
 
-        jLabel4.setText("jLabel4");
+        jLabelEtat.setText("Etat connexion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,14 +271,14 @@ public class PPE3 extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabelEtat)
                         .addGap(49, 49, 49))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addComponent(jLabelEtat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -287,7 +287,7 @@ public class PPE3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
     if (this.connecte != 0) {    
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
            try {
@@ -320,7 +320,7 @@ public class PPE3 extends javax.swing.JFrame {
                                          
 
     
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAfficherProdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -336,8 +336,8 @@ public class PPE3 extends javax.swing.JFrame {
                 }
 
                 JOptionPane.showMessageDialog(this, "Connexion réussie. Vous êtes connecté en tant que "+ lesTuples.getString("libelle") + "");
-                jLabel4.setText("Bonjour "+ jTextField1.getText() +", vous êtes connecté en tant que " + lesTuples.getString("libelle"));
-                jLabel4.setVisible(true);
+                jLabelEtat.setText("Bonjour "+ jTextField1.getText() +", vous êtes connecté en tant que " + lesTuples.getString("libelle"));
+                jLabelEtat.setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(this,"Echec du chargement, la requête n'a pas retourné d'informations !!");
@@ -349,17 +349,17 @@ public class PPE3 extends javax.swing.JFrame {
             Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (connecte == 1)
-            jButton4.setVisible(true);
+            jButtonAjouterProd.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonAjouterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterProdActionPerformed
 DetailProd detail = new DetailProd(this, true);
 detail.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonAjouterProdActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 if (this.connecte != 0) {    
@@ -419,11 +419,11 @@ addCli.setVisible(true);
         modif.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
         DefaultTableModel laModif = (DefaultTableModel) jTable1.getModel();
         ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
         modif.setVisible(true);       // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonModifProdActionPerformed
    
     
     /**
@@ -465,16 +465,16 @@ addCli.setVisible(true);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonAfficherProd;
+    private javax.swing.JButton jButtonAjouterProd;
+    private javax.swing.JButton jButtonModifProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelEtat;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
