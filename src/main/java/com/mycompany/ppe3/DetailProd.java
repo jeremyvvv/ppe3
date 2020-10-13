@@ -159,7 +159,7 @@ public class DetailProd extends javax.swing.JDialog {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +187,9 @@ public class DetailProd extends javax.swing.JDialog {
     }
     else {
         JOptionPane.showMessageDialog(this, "Produit ajouté !");
+        
     }
+    this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
