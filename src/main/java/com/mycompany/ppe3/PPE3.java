@@ -713,8 +713,8 @@ else{
     }//GEN-LAST:event_jButtonModifProfilActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        CategorieCombo cd = (CategorieCombo) jComboBoxClient.getSelectedItem();
-        CategorieCombo cp = (CategorieCombo) jComboBoxProduit.getSelectedItem();
+        String cd = jComboBoxClient.getSelectedItem().toString();
+        String cp = jComboBoxProduit.getSelectedItem().toString();
         DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Produit");
@@ -727,7 +727,7 @@ else{
 //            Object[][] donnees = {
 //                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
 //            };   
-            leModel.addRow(new Object[]{cp.getId(), lesTuples.getString("stock"), lesTuples.getString("refproduit"),lesTuples.getString("prixProduit"), lesTuples.getString("populariteProduit") + "★", lesTuples.getString("nomcategorie")});
+            leModel.addRow(new Object[]{cp, jTextField2.getText()} );
             }
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
