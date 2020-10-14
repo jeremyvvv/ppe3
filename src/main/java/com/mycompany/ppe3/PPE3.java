@@ -75,6 +75,12 @@ public class PPE3 extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jButtonAfficherProfil = new javax.swing.JButton();
+        jButtonModifProfil = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabelEtat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,7 +167,7 @@ public class PPE3 extends javax.swing.JFrame {
         jTable2.setModel(new DefaultTableModel());
         jScrollPane1.setViewportView(jTable2);
 
-        jButtonModifProd.setText("Modifier Produit");
+        jButtonModifProd.setText("Modifier sélection");
         jButtonModifProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonModifProdActionPerformed(evt);
@@ -258,6 +264,62 @@ public class PPE3 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clients", jPanel3);
 
+        jTable3.setModel(new DefaultTableModel());
+        jScrollPane2.setViewportView(jTable3);
+
+        jButtonAfficherProfil.setText("Afficher Profil");
+        jButtonAfficherProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAfficherProfilActionPerformed(evt);
+            }
+        });
+
+        jButtonModifProfil.setText("Modifier sélection");
+        jButtonModifProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModifProfilActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Ajouter Profil");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAfficherProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModifProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jButtonAfficherProfil)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModifProfil)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Personnel", jPanel4);
+
         jLabelEtat.setText("Etat connexion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,7 +350,7 @@ public class PPE3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
-    if (this.connecte != 0) {    
+  
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Produit p inner join Categorie c on p.id_1 = c.id");
@@ -313,10 +375,7 @@ public class PPE3 extends javax.swing.JFrame {
             Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    else {
-        JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
-    }        // TODO add your handling code here:
+          // TODO add your handling code here:
                                          
 
     
@@ -362,7 +421,7 @@ detail.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonAjouterProdActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-if (this.connecte != 0) {    
+    
         DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Client");
@@ -374,9 +433,7 @@ if (this.connecte != 0) {
             leModel.addColumn("Numero");// (a et b)
             
             while (lesTuples.next()) {
-//            Object[][] donnees = {
-//                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
-//            };   
+
             leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")});
             }
                      
@@ -385,10 +442,7 @@ if (this.connecte != 0) {
             Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    else {
-        JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
-    }        // TODO add your handling code here:
+           // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -398,7 +452,7 @@ addCli.setVisible(true);
     
     public String getID(){
         Integer id = jTable1.getSelectedRow();
-        return (String) jTable1.getValueAt(id,0);
+        return (String) jTable2.getValueAt(id,0);
     }
     
     public String getCli(){
@@ -413,17 +467,120 @@ addCli.setVisible(true);
     Integer num = jTable1.getSelectedRow();
     return (String) jTable1.getValueAt(num,3);
 }
+    public String getIDp(){
+        Integer id = jTable2.getSelectedRow();
+        return (String) jTable2.getValueAt(id, 0);
+    }
+   
+    public String getProd(){
+        Integer nom = jTable2.getSelectedRow();
+        return (String) jTable2.getValueAt(nom, 1);
+    }
+    public String getStock(){
+        Integer stock = jTable2.getSelectedRow();
+        return (String) jTable2.getValueAt(stock, 2);
+    }
+    public String getRef(){
+        Integer ref = jTable2.getSelectedRow();
+        return (String) jTable2.getValueAt (ref, 3);
+    }
+    
+    public String getIDpr(){
+        Integer id = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt(id, 0);
+    }
+   
+    public String getIdent(){
+        Integer ident = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt(ident, 1);
+    }
+    public String getNom(){
+        Integer nom = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt(nom, 2);
+    }
+    public String getPrenom(){
+        Integer prenom = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt (prenom, 3);
+    }
+    public String getMail(){
+        Integer mail = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt (mail, 4);
+    }
+    public String getTel(){
+        Integer tel = jTable3.getSelectedRow();
+        return (String) jTable3.getValueAt (tel, 5);
+    }
+    
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        DefaultTableModel laModif = (DefaultTableModel) jTable1.getModel();
-        ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
+
+    if (jTable2.getSelectedRow() == -1)
+{
+    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+}
+else{   ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
         modif.setVisible(true);
+     }
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
-        DefaultTableModel laModif = (DefaultTableModel) jTable1.getModel();
-        ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
-        modif.setVisible(true);       // TODO add your handling code here:
+if (this.connecte != 0)
+    
+{
+    if (jTable2.getSelectedRow() == -1)
+{
+    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+}
+else{
+        ModifProd modif = new ModifProd (this, true, this.getIDp(), this.getProd(), this.getStock(), this.getRef());
+        modif.setVisible(true);
+}
+}
+else{
+    JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
+}
     }//GEN-LAST:event_jButtonModifProdActionPerformed
+
+    private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
+            DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
+           try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Personnel p inner join Profil pr on p.id_1 = pr.id");
+            leModel.setColumnCount(0);
+            leModel.setRowCount(0);
+            leModel.addColumn("ID");
+            leModel.addColumn("Identifiant");
+            leModel.addColumn("Nom");
+            leModel.addColumn("Prenom");
+            leModel.addColumn("Mail");
+            leModel.addColumn("Tel");
+            leModel.addColumn("Profil");// (a et b)
+            
+            while (lesTuples.next()) {             
+            leModel.addRow(new Object[]{lesTuples.getString("id"),lesTuples.getString("identifiant"), lesTuples.getString("nom"), lesTuples.getString("prenom"), lesTuples.getString("email"), lesTuples.getString("tel"), lesTuples.getString("libelle")});
+            }
+                     
+           } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+DetailProfil profil = new DetailProfil(this, true);
+profil.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
+if (jTable2.getSelectedRow() == -1)
+{
+    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+}
+else{
+    ModifProfil modifp = new ModifProfil(this, true, this.getIDpr(), this.getIdent(), this.getNom(), this.getPrenom(), this.getMail(), this.getTel());
+    modifp.setVisible(true);
+}
+    }//GEN-LAST:event_jButtonModifProfilActionPerformed
    
     
     /**
@@ -465,12 +622,15 @@ addCli.setVisible(true);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButtonAfficherProd;
+    private javax.swing.JButton jButtonAfficherProfil;
     private javax.swing.JButton jButtonAjouterProd;
     private javax.swing.JButton jButtonModifProd;
+    private javax.swing.JButton jButtonModifProfil;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -478,12 +638,15 @@ addCli.setVisible(true);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
