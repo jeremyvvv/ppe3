@@ -42,8 +42,8 @@ public class PPE3 extends javax.swing.JFrame {
         DefaultComboBoxModel leModel2= (DefaultComboBoxModel) jComboBoxProduit.getModel();
         
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Client");
-            ResultSet lesTuples2 = DaoSIO.getInstance().requeteSelection("select * from Produit");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
+            ResultSet lesTuples2 = DaoSIO.getInstance().requeteSelection("select * from produit");
             while (lesTuples.next()) {
                 CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomClient"));
                 leModel.addElement(cc);
@@ -114,8 +114,8 @@ public class PPE3 extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jButtonEditVente = new javax.swing.JButton();
         jButtonDeleteProd = new javax.swing.JButton();
+        jButtonValider = new javax.swing.JButton();
         jLabelEtat = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -374,6 +374,8 @@ public class PPE3 extends javax.swing.JFrame {
 
         jButtonDeleteProd.setText("Supprimer Produit");
 
+        jButtonValider.setText("Valider Vente");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -406,6 +408,10 @@ public class PPE3 extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jButtonValider)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,18 +433,18 @@ public class PPE3 extends javax.swing.JFrame {
                         .addComponent(jButtonEditVente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonDeleteProd)
-                        .addGap(95, 95, 95))
+                        .addGap(67, 67, 67)
+                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(23, Short.MAX_VALUE))))
+                        .addGap(0, 35, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Vente", jPanel5);
 
         jLabelEtat.setText("Etat connexion");
-
-        jButton2.setText("jButton2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -453,21 +459,15 @@ public class PPE3 extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelEtat)
                         .addGap(49, 49, 49))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addComponent(jButton2)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jLabelEtat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(16, 16, 16))
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -477,7 +477,7 @@ public class PPE3 extends javax.swing.JFrame {
   
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Produit p inner join Categorie c on p.id_1 = c.id");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit p inner join categorie c on p.id_1 = c.id");
             leModel.setColumnCount(0);
             leModel.setRowCount(0);
             leModel.addColumn("ID");
@@ -509,7 +509,7 @@ public class PPE3 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Personnel p inner Join Profil on p.id_1=Profil.id where identifiant = '" + jTextField1.getText() + "' and mdp = '" + jPasswordField1.getText() +"' ");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + jTextField1.getText() + "' and mdp = '" + jPasswordField1.getText() +"' ");
             if (lesTuples.next()) {
                 int id = lesTuples.getInt("id_1");
 
@@ -550,7 +550,7 @@ detail.setVisible(true);// TODO add your handling code here:
     
         DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Client");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
             leModel.setColumnCount(0);
             leModel.setRowCount(0);
             leModel.addColumn("ID");
@@ -578,7 +578,7 @@ addCli.setVisible(true);
     
     public String getID(){
         Integer id = jTable1.getSelectedRow();
-        return (String) jTable2.getValueAt(id,0);
+        return (String) jTable1.getValueAt(id,0);
     }
     
     public String getCli(){
@@ -643,11 +643,12 @@ addCli.setVisible(true);
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-    if (jTable2.getSelectedRow() == -1)
+    if (jTable1.getSelectedRow() == -1)
 {
     JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
 }
-else{   ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
+else{
+        ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
         modif.setVisible(true);
      }
 
@@ -674,7 +675,7 @@ else{
     private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
             DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Personnel p inner join Profil pr on p.id_1 = pr.id");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
             leModel.setColumnCount(0);
             leModel.setRowCount(0);
             leModel.addColumn("ID");
@@ -717,7 +718,7 @@ else{
         String cp = jComboBoxProduit.getSelectedItem().toString();
         DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Produit");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit");
             leModel.setColumnCount(0);
             leModel.addColumn("Produit");
             leModel.addColumn("Stock");
@@ -775,7 +776,6 @@ else{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
@@ -788,6 +788,7 @@ else{
     private javax.swing.JButton jButtonEditVente;
     private javax.swing.JButton jButtonModifProd;
     private javax.swing.JButton jButtonModifProfil;
+    private javax.swing.JButton jButtonValider;
     private javax.swing.JComboBox<String> jComboBoxClient;
     private javax.swing.JComboBox<String> jComboBoxProduit;
     private javax.swing.JLabel jLabel1;

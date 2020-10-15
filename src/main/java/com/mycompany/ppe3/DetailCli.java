@@ -120,7 +120,7 @@ public class DetailCli extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into Client (nomClient, adresseClient, numClient) values ('" + jTextField1.getText() + "', '" + jTextField2.getText() +"', '"+ jTextField3.getText() +"')");
+    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into client (nomClient, adresseClient, numClient) values ('" + jTextField1.getText() + "', '" + jTextField2.getText() +"', '"+ jTextField3.getText() +"')");
         if (nbLignesInserees == 0)
         {
             JOptionPane.showMessageDialog(this, "La requête a échoué.");

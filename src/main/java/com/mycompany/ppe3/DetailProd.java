@@ -28,7 +28,7 @@ public class DetailProd extends javax.swing.JDialog {
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBox1.getModel();
                
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Categorie");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from categorie");
             while (lesTuples.next()) {
                 CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
                 leModel.addElement(cc);
@@ -190,7 +190,7 @@ public class DetailProd extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CategorieCombo cd = (CategorieCombo) jComboBox1.getSelectedItem();
     String cp = jComboBox2.getSelectedItem().toString();
-    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into Produit (nomproduit, stock, refproduit, prixProduit, populariteProduit, id_1) values ('"+ jTextField1.getText() + "','" + jTextField2.getText() + "','"+ jTextField4.getText() + "',"+ jTextFieldPrix.getText() +"', "+ cp + "," + cd.getId()+ ")");
+    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into produit (nomproduit, stock, refproduit, prixProduit, populariteProduit, id_1) values ('"+ jTextField1.getText() + "','" + jTextField2.getText() + "','"+ jTextField4.getText() + "', '"+ jTextFieldPrix.getText() +"', '"+ cp + "'," + cd.getId()+ ")");
     if (nbLignesInserees == 0)
     {
         JOptionPane.showMessageDialog(this, "Echec de la requête.");

@@ -27,7 +27,7 @@ public class DetailProfil extends javax.swing.JDialog {
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBoxProfil.getModel();
                
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Profil");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from profil");
             while (lesTuples.next()) {
                 CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("libelle"));
                 leModel.addElement(cc);
@@ -172,7 +172,7 @@ public class DetailProfil extends javax.swing.JDialog {
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
     CategorieCombo cd = (CategorieCombo) jComboBoxProfil.getSelectedItem();
-    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into Personnel (identifiant, mdp, nom, prenom, email, tel, id_1) values ('"+ jTextFieldLibelleID.getText() + "','" + jPasswordFieldMdp.getText() + "','"+ jTextFieldNom.getText() + "', '"+ jTextFieldPrenom.getText() + "', '" + jTextFieldMail.getText() + "', '" + jTextFieldTel.getText() + "', '" + cd.getId() + "')");
+    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into personnel (identifiant, mdp, nom, prenom, email, tel, id_1) values ('"+ jTextFieldLibelleID.getText() + "','" + jPasswordFieldMdp.getText() + "','"+ jTextFieldNom.getText() + "', '"+ jTextFieldPrenom.getText() + "', '" + jTextFieldMail.getText() + "', '" + jTextFieldTel.getText() + "', '" + cd.getId() + "')");
     if (nbLignesInserees == 0)
     {
         JOptionPane.showMessageDialog(this, "Echec de la requête.");

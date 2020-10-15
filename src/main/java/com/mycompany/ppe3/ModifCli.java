@@ -135,7 +135,7 @@ public class ModifCli extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 int id = Integer.parseInt(jTextField4.getText());
-Integer lesTuples = DaoSIO.getInstance().requeteAction("update Client set nomClient = '" + jTextField1.getText() + "', adresseClient = '" + jTextField2.getText() + "', numClient = '" + jTextField3.getText() + "' where id = " + id + "");
+Integer lesTuples = DaoSIO.getInstance().requeteAction("update client set nomClient = '" + jTextField1.getText() + "', adresseClient = '" + jTextField2.getText() + "', numClient = '" + jTextField3.getText() + "' where id = " + id + "");
 if (lesTuples == 0){
     JOptionPane.showMessageDialog(this, "Echec de la requête");
 }

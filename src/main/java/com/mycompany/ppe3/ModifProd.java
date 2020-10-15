@@ -36,7 +36,7 @@ public class ModifProd extends javax.swing.JDialog {
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBox1.getModel();
                
            try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from Categorie");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from categorie");
             while (lesTuples.next()) {
                 CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
                 leModel.addElement(cc);
