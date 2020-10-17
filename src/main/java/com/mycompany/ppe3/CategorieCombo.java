@@ -12,7 +12,14 @@ package com.mycompany.ppe3;
 public class CategorieCombo {
     String id;
     String value;
+    String prix;
 
+    public CategorieCombo(String id, String value, String prix) {
+        this.id = id;
+        this.value = value;
+        this.prix = prix;
+    }
+    
     public CategorieCombo(String id, String value) {
         this.id = id;
         this.value = value;
@@ -37,6 +44,14 @@ public class CategorieCombo {
     @Override
     public String toString() {
         return value;
+    }
+
+    public String getPrix() {
+        return prix;
+    }
+
+    public void setPrix(String prix) {
+        this.prix = prix;
     }
     
 }

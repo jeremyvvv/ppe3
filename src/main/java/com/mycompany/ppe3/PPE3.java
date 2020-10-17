@@ -27,19 +27,53 @@ public class PPE3 extends javax.swing.JFrame {
     /**
      * Creates new form PPE3
      */
-    public PPE3() {
+    public PPE3(){
+        
+    }
+    
+    public PPE3(String co) {
         initComponents();
+        try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + co + "' ");
+            if (lesTuples.next()) {
+                int id = lesTuples.getInt("id_1");
+
+                if (id == 1) {
+                    connecte = 1;
+                }
+                else {
+                    connecte = 2;
+                }
+
+                jLabelEtat.setText("Bonjour "+ co +", vous êtes connecté en tant que " + lesTuples.getString("libelle"));
+                jLabelEtat.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this,"Echec du chargement, la requête n'a pas retourné d'informations !!");
+            }
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(this, "Mauvais id ou mdp");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if (DaoSIO.getInstance().connexionActive()){
             System.out.println("Connecté");
         }
         else {
             System.out.println("Erreur de connexion à la base de donnée, veuillez rééssayer.");
         }
-        jLabelEtat.setText("Non connecté.");
-        jButtonAjouterProd.setVisible(false);
+        
+        
         
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBoxClient.getModel();
         DefaultComboBoxModel leModel2= (DefaultComboBoxModel) jComboBoxProduit.getModel();
+        DefaultTableModel leModelVente= (DefaultTableModel) jTable4.getModel();
+        leModelVente.addColumn("Produit");
+        leModelVente.addColumn("Stock");
+        leModelVente.addColumn("Prix");
+        jTextFieldQte.setText("1");
         
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
@@ -49,7 +83,7 @@ public class PPE3 extends javax.swing.JFrame {
                 leModel.addElement(cc);
             }
             while (lesTuples2.next()) {
-                CategorieCombo cp = new CategorieCombo(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"));
+                CategorieCombo cp = new CategorieCombo(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"), lesTuples2.getString("prixProduit"));
                 leModel2.addElement(cp);
             }
  
@@ -77,13 +111,6 @@ public class PPE3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jButtonAfficherProd = new javax.swing.JButton();
         jButtonAjouterProd = new javax.swing.JButton();
@@ -107,82 +134,16 @@ public class PPE3 extends javax.swing.JFrame {
         jComboBoxClient = new javax.swing.JComboBox<>();
         jLabelProduit = new javax.swing.JLabel();
         jComboBoxProduit = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldQte = new javax.swing.JTextField();
         jLabelQte = new javax.swing.JLabel();
         jButtonAdd = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jButtonEditVente = new javax.swing.JButton();
         jButtonDeleteProd = new javax.swing.JButton();
         jButtonValider = new javax.swing.JButton();
         jLabelEtat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Login");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Identifiant");
-
-        jLabel3.setText("Mot de passe");
-
-        jButton1.setText("Connexion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(161, 161, 161)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(293, 293, 293)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton1))))
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addGap(61, 61, 61)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(40, 40, 40))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57)
-                .addComponent(jButton1)
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Connexion", jPanel1);
 
         jButtonAfficherProd.setText("Afficher Produits");
         jButtonAfficherProd.addActionListener(new java.awt.event.ActionListener() {
@@ -370,76 +331,70 @@ public class PPE3 extends javax.swing.JFrame {
         jTable4.setModel(new DefaultTableModel());
         jScrollPane4.setViewportView(jTable4);
 
-        jButtonEditVente.setText("Modifier Sélection");
-
-        jButtonDeleteProd.setText("Supprimer Produit");
+        jButtonDeleteProd.setText("-");
+        jButtonDeleteProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteProdActionPerformed(evt);
+            }
+        });
 
         jButtonValider.setText("Valider Vente");
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonDeleteProd, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addComponent(jButtonEditVente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabelClient)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabelClient)
-                                .addGap(74, 74, 74)
-                                .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jLabelProduit)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(jLabelQte)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                        .addComponent(jLabelProduit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabelQte)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldQte, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonDeleteProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButtonValider)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelClient))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelProduit)
-                    .addComponent(jLabelQte)
-                    .addComponent(jButtonAdd))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonValider)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonEditVente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonDeleteProd)
-                        .addGap(67, 67, 67)
-                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelClient))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldQte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelProduit)
+                            .addComponent(jLabelQte)
+                            .addComponent(jButtonAdd)
+                            .addComponent(jButtonDeleteProd))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 35, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vente", jPanel5);
@@ -473,10 +428,143 @@ public class PPE3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonValiderActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        String cd = jComboBoxClient.getSelectedItem().toString();
+        String cp = jComboBoxProduit.getSelectedItem().toString();
+        CategorieCombo pp = (CategorieCombo) jComboBoxProduit.getSelectedItem();
+        DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
+        try{
+
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit");
+
+            //            Object[][] donnees = {
+                //                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
+                //            };
+
+            if (lesTuples.next())
+            leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
+
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        DetailProfil profil = new DetailProfil(this, true);
+        profil.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
+        if (jTable2.getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+        }
+        else{
+            ModifProfil modifp = new ModifProfil(this, true, this.getIDpr(), this.getIdent(), this.getNom(), this.getPrenom(), this.getMail(), this.getTel());
+            modifp.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonModifProfilActionPerformed
+
+    private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
+        DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
+        try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
+            leModel.setColumnCount(0);
+            leModel.setRowCount(0);
+            leModel.addColumn("ID");
+            leModel.addColumn("Identifiant");
+            leModel.addColumn("Nom");
+            leModel.addColumn("Prenom");
+            leModel.addColumn("Mail");
+            leModel.addColumn("Tel");
+            leModel.addColumn("Profil");// (a et b)
+
+            while (lesTuples.next()) {
+                leModel.addRow(new Object[]{lesTuples.getString("id"),lesTuples.getString("identifiant"), lesTuples.getString("nom"), lesTuples.getString("prenom"), lesTuples.getString("email"), lesTuples.getString("tel"), lesTuples.getString("libelle")});
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
+        if (jTable1.getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+        }
+        else{
+            ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
+            modif.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        DetailCli addCli = new DetailCli(this, true);
+        addCli.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
+        try {
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
+            leModel.setColumnCount(0);
+            leModel.setRowCount(0);
+            leModel.addColumn("ID");
+            leModel.addColumn("Nom");
+            leModel.addColumn("Adresse");
+            leModel.addColumn("Numero");// (a et b)
+
+            while (lesTuples.next()) {
+
+                leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")});
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
+        if (this.connecte != 0)
+
+        {
+            if (jTable2.getSelectedRow() == -1)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+            }
+            else{
+                ModifProd modif = new ModifProd (this, true, this.getIDp(), this.getProd(), this.getStock(), this.getRef(), this.getPrix());
+                modif.setVisible(true);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
+        }
+    }//GEN-LAST:event_jButtonModifProdActionPerformed
+
+    private void jButtonAjouterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterProdActionPerformed
+        DetailProd detail = new DetailProd(this, true);
+        detail.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAjouterProdActionPerformed
+
     private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
-  
+
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
-           try {
+        try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit p inner join categorie c on p.id_1 = c.id");
             leModel.setColumnCount(0);
             leModel.setRowCount(0);
@@ -487,94 +575,35 @@ public class PPE3 extends javax.swing.JFrame {
             leModel.addColumn("Prix");
             leModel.addColumn("Popularité");
             leModel.addColumn("Categorie");
-            
-            
+
             while (lesTuples.next()) {
-//            Object[][] donnees = {
-//                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
-//            };   
-            leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomproduit"), lesTuples.getString("stock"), lesTuples.getString("refproduit"),lesTuples.getString("prixProduit"), lesTuples.getString("populariteProduit") + "★", lesTuples.getString("nomcategorie")});
-            }
-                     
-           } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-          // TODO add your handling code here:
-                                         
-
-    
-    }//GEN-LAST:event_jButtonAfficherProdActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + jTextField1.getText() + "' and mdp = '" + jPasswordField1.getText() +"' ");
-            if (lesTuples.next()) {
-                int id = lesTuples.getInt("id_1");
-
-                if (id == 1) {
-                    connecte = 1;
-                }
-                else {
-                    connecte = 2;
-                }
-
-                JOptionPane.showMessageDialog(this, "Connexion réussie. Vous êtes connecté en tant que "+ lesTuples.getString("libelle") + "");
-                jLabelEtat.setText("Bonjour "+ jTextField1.getText() +", vous êtes connecté en tant que " + lesTuples.getString("libelle"));
-                jLabelEtat.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(this,"Echec du chargement, la requête n'a pas retourné d'informations !!");
+                //            Object[][] donnees = {
+                    //                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
+                    //            };
+                leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomproduit"), lesTuples.getString("stock"), lesTuples.getString("refproduit"),lesTuples.getString("prixProduit"), lesTuples.getString("populariteProduit") + "★", lesTuples.getString("nomcategorie")});
             }
 
         } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(this, "Mauvais id ou mdp");
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (connecte == 1)
-            jButtonAjouterProd.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButtonAjouterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterProdActionPerformed
-DetailProd detail = new DetailProd(this, true);
-detail.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAjouterProdActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    
-        DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
-           try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
-            leModel.setColumnCount(0);
-            leModel.setRowCount(0);
-            leModel.addColumn("ID");
-            leModel.addColumn("Nom");
-            leModel.addColumn("Adresse");
-            leModel.addColumn("Numero");// (a et b)
-            
-            while (lesTuples.next()) {
-
-            leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")});
-            }
-                     
-           } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
             Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-           // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-DetailCli addCli = new DetailCli(this, true);
-addCli.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButtonAfficherProdActionPerformed
+
+    private void jButtonDeleteProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteProdActionPerformed
+    DefaultTableModel leModel= (DefaultTableModel) jTable4.getModel();
+    Integer id = jTable4.getSelectedRow();
+    if (jTable4.getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
+        }
+        else
+        {
+        leModel.removeRow(id);
+        }
+    }//GEN-LAST:event_jButtonDeleteProdActionPerformed
     
     public String getID(){
         Integer id = jTable1.getSelectedRow();
@@ -640,102 +669,7 @@ addCli.setVisible(true);
         Integer tel = jTable3.getSelectedRow();
         return (String) jTable3.getValueAt (tel, 5);
     }
-    
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-    if (jTable1.getSelectedRow() == -1)
-{
-    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
-}
-else{
-        ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
-        modif.setVisible(true);
-     }
-
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
-if (this.connecte != 0)
-    
-{
-    if (jTable2.getSelectedRow() == -1)
-{
-    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
-}
-else{
-        ModifProd modif = new ModifProd (this, true, this.getIDp(), this.getProd(), this.getStock(), this.getRef(), this.getPrix());
-        modif.setVisible(true);
-}
-}
-else{
-    JOptionPane.showMessageDialog(this, "Veuillez vous connecter.");
-}
-    }//GEN-LAST:event_jButtonModifProdActionPerformed
-
-    private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
-            DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
-           try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
-            leModel.setColumnCount(0);
-            leModel.setRowCount(0);
-            leModel.addColumn("ID");
-            leModel.addColumn("Identifiant");
-            leModel.addColumn("Nom");
-            leModel.addColumn("Prenom");
-            leModel.addColumn("Mail");
-            leModel.addColumn("Tel");
-            leModel.addColumn("Profil");// (a et b)
-            
-            while (lesTuples.next()) {             
-            leModel.addRow(new Object[]{lesTuples.getString("id"),lesTuples.getString("identifiant"), lesTuples.getString("nom"), lesTuples.getString("prenom"), lesTuples.getString("email"), lesTuples.getString("tel"), lesTuples.getString("libelle")});
-            }
-                     
-           } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-DetailProfil profil = new DetailProfil(this, true);
-profil.setVisible(true);
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
-if (jTable2.getSelectedRow() == -1)
-{
-    JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
-}
-else{
-    ModifProfil modifp = new ModifProfil(this, true, this.getIDpr(), this.getIdent(), this.getNom(), this.getPrenom(), this.getMail(), this.getTel());
-    modifp.setVisible(true);
-}
-    }//GEN-LAST:event_jButtonModifProfilActionPerformed
-
-    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        String cd = jComboBoxClient.getSelectedItem().toString();
-        String cp = jComboBoxProduit.getSelectedItem().toString();
-        DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
-           try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit");
-            leModel.setColumnCount(0);
-            leModel.addColumn("Produit");
-            leModel.addColumn("Stock");
-            leModel.addColumn("Prix");
-         
-            while (lesTuples.next()) {
-//            Object[][] donnees = {
-//                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
-//            };   
-            leModel.addRow(new Object[]{cp, jTextField2.getText()} );
-            }
-            } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonAddActionPerformed
-   
+       
     
     /**
      * @param args the command line arguments
@@ -769,13 +703,12 @@ else{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PPE3().setVisible(true);
+                new PPE3().setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
@@ -785,25 +718,19 @@ else{
     private javax.swing.JButton jButtonAfficherProfil;
     private javax.swing.JButton jButtonAjouterProd;
     private javax.swing.JButton jButtonDeleteProd;
-    private javax.swing.JButton jButtonEditVente;
     private javax.swing.JButton jButtonModifProd;
     private javax.swing.JButton jButtonModifProfil;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JComboBox<String> jComboBoxClient;
     private javax.swing.JComboBox<String> jComboBoxProduit;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelClient;
     private javax.swing.JLabel jLabelEtat;
     private javax.swing.JLabel jLabelProduit;
     private javax.swing.JLabel jLabelQte;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -813,7 +740,6 @@ else{
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextFieldQte;
     // End of variables declaration//GEN-END:variables
 }
