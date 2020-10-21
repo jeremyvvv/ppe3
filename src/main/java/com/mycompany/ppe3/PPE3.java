@@ -6,15 +6,18 @@
 package com.mycompany.ppe3;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +35,8 @@ public class PPE3 extends javax.swing.JFrame {
     }
     
     public PPE3(String co) {
-        initComponents();
+        initComponents();   
+        
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + co + "' ");
             if (lesTuples.next()) {
@@ -45,7 +49,8 @@ public class PPE3 extends javax.swing.JFrame {
                     connecte = 2;
                 }
 
-                jLabelEtat.setText("Bonjour "+ co +", vous êtes connecté en tant que " + lesTuples.getString("libelle"));
+                jLabelEtat.setText(co);
+                jLabelEtatProfil.setText(lesTuples.getString("libelle"));
                 jLabelEtat.setVisible(true);
 
             } else {
@@ -69,21 +74,40 @@ public class PPE3 extends javax.swing.JFrame {
         
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBoxClient.getModel();
         DefaultComboBoxModel leModel2= (DefaultComboBoxModel) jComboBoxProduit.getModel();
+        DefaultComboBoxModel leModel3 = (DefaultComboBoxModel) jComboBoxPersonnel.getModel();
         DefaultTableModel leModelVente= (DefaultTableModel) jTable4.getModel();
         leModelVente.addColumn("Produit");
         leModelVente.addColumn("Stock");
         leModelVente.addColumn("Prix");
         jTextFieldQte.setText("1");
+        jComboBoxPersonnel.setVisible(false);
         
+           try{
+               ResultSet lesTuples3 = DaoSIO.getInstance().requeteSelection("select * from personnel where identifiant = '" + jLabelEtat.getText() + "'");
+            while (lesTuples3.next())
+            {
+                CategorieCombo cPers = new CategorieCombo(lesTuples3.getString("id"), lesTuples3.getString("identifiant"));
+                leModel3.addElement(cPers);
+            }
+           }
+            catch(SQLException ex)
+                    {
+                    JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec mec !!");
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+           
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
             ResultSet lesTuples2 = DaoSIO.getInstance().requeteSelection("select * from produit");
+            
+    
+    
             while (lesTuples.next()) {
                 CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomClient"));
                 leModel.addElement(cc);
             }
             while (lesTuples2.next()) {
-                CategorieCombo cp = new CategorieCombo(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"), lesTuples2.getString("prixProduit"));
+                CategorieCombo cp = new CategorieCombo(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"), lesTuples2.getFloat("prixProduit"));
                 leModel2.addElement(cp);
             }
  
@@ -99,8 +123,14 @@ public class PPE3 extends javax.swing.JFrame {
     
     int connecte = 0;
     
-          
-    
+    public float getTotal ()
+    {      
+        float total = 0;
+        for (int i = 0; i < jTable4.getRowCount(); i++)
+           total =+ (float) jTable4.getValueAt( i, 2);
+        
+     return total;       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,7 +171,11 @@ public class PPE3 extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jButtonDeleteProd = new javax.swing.JButton();
         jButtonValider = new javax.swing.JButton();
+        jComboBoxPersonnel = new javax.swing.JComboBox<>();
         jLabelEtat = new javax.swing.JLabel();
+        jLabelCo = new javax.swing.JLabel();
+        jLabelProfil = new javax.swing.JLabel();
+        jLabelEtatProfil = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,7 +231,7 @@ public class PPE3 extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Produits", jPanel2);
@@ -254,7 +288,7 @@ public class PPE3 extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clients", jPanel3);
@@ -310,7 +344,7 @@ public class PPE3 extends javax.swing.JFrame {
                         .addComponent(jButtonModifProfil)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Personnel", jPanel4);
@@ -351,25 +385,27 @@ public class PPE3 extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
                         .addComponent(jLabelClient)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabelProduit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabelQte)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldQte, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDeleteProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153)
+                        .addComponent(jComboBoxPersonnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabelProduit)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(44, 44, 44)
+                            .addComponent(jLabelQte)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextFieldQte, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(51, 51, 51)
+                            .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonDeleteProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButtonValider)
                 .addContainerGap())
@@ -383,7 +419,8 @@ public class PPE3 extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelClient))
+                            .addComponent(jLabelClient)
+                            .addComponent(jComboBoxPersonnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,42 +431,106 @@ public class PPE3 extends javax.swing.JFrame {
                             .addComponent(jButtonDeleteProd))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vente", jPanel5);
 
         jLabelEtat.setText("Etat connexion");
 
+        jLabelCo.setText("Connecté en tant que");
+
+        jLabelProfil.setText("Profil");
+
+        jLabelEtatProfil.setText("Etat profil");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelEtat)
-                        .addGap(49, 49, 49))))
+                    .addComponent(jLabelCo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelProfil, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEtat)
+                    .addComponent(jLabelEtatProfil))
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jLabelEtat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEtat)
+                    .addComponent(jLabelCo))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelProfil)
+                    .addComponent(jLabelEtatProfil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean existsInTable(JTable table, Object[] entry) {
+
+    // Get row and column count
+    int rowCount = table.getRowCount();
+    int colCount = table.getColumnCount();
+
+    // Get Current Table Entry
+    String curEntry = "";
+    for (Object o : entry) {
+        String e = o.toString();
+        curEntry = curEntry + " " + e;
+    }
+
+    // Check against all entries
+    for (int i = 0; i < rowCount; i++) {
+        String rowEntry = "";
+        for (int j = 0; j < colCount; j++)
+            rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
+        if (rowEntry.equalsIgnoreCase(curEntry)) {
+            return true;
+        }
+    }
+    return false;
+}
+    
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-        // TODO add your handling code here:
+    
+    float total = 0;
+    for (int i = 0; i < jTable4.getRowCount(); i++)
+    total += (float) jTable4.getValueAt( i, 2);
+       
+        
+    
+    Date d = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    
+    CategorieCombo cc = (CategorieCombo) jComboBoxClient.getSelectedItem();
+    CategorieCombo cp = (CategorieCombo) jComboBoxPersonnel.getSelectedItem();
+    
+    Integer lesTuplesInsert = DaoSIO.getInstance().requeteAction("insert into vente (dateVente, chiffreAffaire, id_1, id_2) values ('" + formatter.format(d) + "', '" + total + "', '"+ cc.getId() +"' , '"+ cp.getId() +"')");            
+    if (lesTuplesInsert == 0)
+    {
+        JOptionPane.showMessageDialog(this, "Echec de la requête.");
+    }
+    else {
+        JOptionPane.showMessageDialog(this, "Vente créée !");
+    }   
+           
+    
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
@@ -437,13 +538,11 @@ public class PPE3 extends javax.swing.JFrame {
         String cp = jComboBoxProduit.getSelectedItem().toString();
         CategorieCombo pp = (CategorieCombo) jComboBoxProduit.getSelectedItem();
         DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
+        
         try{
 
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit");
 
-            //            Object[][] donnees = {
-                //                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
-                //            };
 
             if (lesTuples.next())
             leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
@@ -722,10 +821,14 @@ public class PPE3 extends javax.swing.JFrame {
     private javax.swing.JButton jButtonModifProfil;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JComboBox<String> jComboBoxClient;
+    private javax.swing.JComboBox<String> jComboBoxPersonnel;
     private javax.swing.JComboBox<String> jComboBoxProduit;
     private javax.swing.JLabel jLabelClient;
+    private javax.swing.JLabel jLabelCo;
     private javax.swing.JLabel jLabelEtat;
+    private javax.swing.JLabel jLabelEtatProfil;
     private javax.swing.JLabel jLabelProduit;
+    private javax.swing.JLabel jLabelProfil;
     private javax.swing.JLabel jLabelQte;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

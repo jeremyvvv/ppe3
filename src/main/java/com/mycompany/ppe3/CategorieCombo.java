@@ -12,9 +12,9 @@ package com.mycompany.ppe3;
 public class CategorieCombo {
     String id;
     String value;
-    String prix;
+    float prix;
 
-    public CategorieCombo(String id, String value, String prix) {
+    public CategorieCombo(String id, String value, float prix) {
         this.id = id;
         this.value = value;
         this.prix = prix;
@@ -46,11 +46,11 @@ public class CategorieCombo {
         return value;
     }
 
-    public String getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(String prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
     

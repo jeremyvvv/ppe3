@@ -23,18 +23,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="650" max="-2" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jTabbedPane1" min="-2" pref="650" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabelEtat" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabelCo" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelProfil" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelEtat" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEtatProfil" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,10 +47,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="19" max="32767" attributes="0"/>
-              <Component id="jLabelEtat" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="369" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelEtat" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelCo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelProfil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEtatProfil" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="357" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,7 +110,7 @@
                               <Component id="jScrollPane1" min="-2" pref="249" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace pref="42" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -187,7 +200,7 @@
                               <Component id="jScrollPane3" min="-2" pref="235" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -276,7 +289,7 @@
                               <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -338,27 +351,30 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="jLabelClient" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jComboBoxClient" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              <Component id="jComboBoxPersonnel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelProduit" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jComboBoxProduit" min="-2" pref="101" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="jLabelQte" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextFieldQte" min="-2" pref="73" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                              <Component id="jButtonAdd" min="-2" pref="51" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonDeleteProd" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelProduit" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxProduit" min="-2" pref="101" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="jLabelQte" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldQte" min="-2" pref="73" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="jButtonAdd" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonDeleteProd" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane4" min="-2" pref="486" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane4" min="-2" pref="486" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="24" max="32767" attributes="0"/>
                       <Component id="jButtonValider" min="-2" max="-2" attributes="0"/>
@@ -376,6 +392,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jComboBoxClient" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelClient" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxPersonnel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -390,7 +407,7 @@
                               <Component id="jScrollPane4" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -473,6 +490,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonValiderActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JComboBox" name="jComboBoxPersonnel">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -480,6 +507,21 @@
     <Component class="javax.swing.JLabel" name="jLabelEtat">
       <Properties>
         <Property name="text" type="java.lang.String" value="Etat connexion"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelCo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Connect&#xe9; en tant que"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelProfil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Profil"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelEtatProfil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Etat profil"/>
       </Properties>
     </Component>
   </SubComponents>
