@@ -20,17 +20,20 @@ import javax.swing.JOptionPane;
 public class DetailProd extends javax.swing.JDialog {
 
     /**
-     * Creates new form DetailProd
+     * Créé une jDialog qui insère un nouveau Produit
      */
     public DetailProd(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBox1.getModel();
-               
+         
+        /**
+         * Cette requete permet de récupérer les catégories et de les insérer dans la Combo Box correspondante
+         */
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from categorie");
             while (lesTuples.next()) {
-                CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
+                ManipComboBox cc = new ManipComboBox(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
                 leModel.addElement(cc);
             }
  
@@ -188,7 +191,10 @@ public class DetailProd extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    CategorieCombo cd = (CategorieCombo) jComboBox1.getSelectedItem();
+    /**
+     * Insère dans la table produit les champs remplis dans les jTextField
+     */
+        ManipComboBox cd = (ManipComboBox) jComboBox1.getSelectedItem();
     String cp = jComboBox2.getSelectedItem().toString();
     Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into produit (nomproduit, stock, refproduit, prixProduit, populariteProduit, id_1) values ('"+ jTextField1.getText() + "','" + jTextField2.getText() + "','"+ jTextField4.getText() + "', '"+ jTextFieldPrix.getText() +"', '"+ cp + "'," + cd.getId()+ ")");
     if (nbLignesInserees == 0)

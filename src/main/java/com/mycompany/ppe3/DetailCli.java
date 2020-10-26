@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class DetailCli extends javax.swing.JDialog {
 
     /**
-     * Creates new form DetailCli
+     * Créé une jDialog pour insérer un nouveau Client
      */
     public DetailCli(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -118,9 +118,12 @@ public class DetailCli extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into client (nomClient, adresseClient, numClient) values ('" + jTextField1.getText() + "', '" + jTextField2.getText() +"', '"+ jTextField3.getText() +"')");
+    /**
+     * Insère dans la table client les champs remplis dans les jTextField
+     */
+        Integer nbLignesInserees = DaoSIO.getInstance().requeteAction("insert into client (nomClient, adresseClient, numClient) values ('" + jTextField1.getText() + "', '" + jTextField2.getText() +"', '"+ jTextField3.getText() +"')");
         if (nbLignesInserees == 0)
         {
             JOptionPane.showMessageDialog(this, "La requête a échoué.");

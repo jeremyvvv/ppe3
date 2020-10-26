@@ -6,21 +6,21 @@
 package com.mycompany.ppe3;
 
 /**
- *
+ * Cette classe permet de récupérer l'id, valeur ou prix de l'objet contenu dans une ComboBox
  * @author j.vassant
  */
-public class CategorieCombo {
+public class ManipComboBox {
     String id;
     String value;
     float prix;
 
-    public CategorieCombo(String id, String value, float prix) {
+    public ManipComboBox(String id, String value, float prix) {
         this.id = id;
         this.value = value;
         this.prix = prix;
     }
     
-    public CategorieCombo(String id, String value) {
+    public ManipComboBox(String id, String value) {
         this.id = id;
         this.value = value;
     }

@@ -38,7 +38,7 @@ public class ModifProd extends javax.swing.JDialog {
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from categorie");
             while (lesTuples.next()) {
-                CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
+                ManipComboBox cc = new ManipComboBox(lesTuples.getString("id"), lesTuples.getString("nomcategorie"));
                 leModel.addElement(cc);
             }
  
@@ -185,7 +185,7 @@ public class ModifProd extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    CategorieCombo cd = (CategorieCombo) jComboBox1.getSelectedItem();
+    ManipComboBox cd = (ManipComboBox) jComboBox1.getSelectedItem();
     String cp = jComboBox2.getSelectedItem().toString();
     int id = Integer.parseInt(jTextField1.getText());
     Integer lesTuples = DaoSIO.getInstance().requeteAction("update Produit set nomproduit = '" + jTextField2.getText() + "', stock = '" + jTextField3.getText() + "', refproduit = '" + jTextField4.getText() + "',prixProduit = '" + jTextFieldPrix.getText() + "', populariteProduit = '" + cp + "', id_1 = '" + cd.getId() + "' where id = " + id + "");

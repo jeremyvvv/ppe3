@@ -34,7 +34,10 @@ public class PPE3 extends javax.swing.JFrame {
         
     }
     
-    public PPE3(String co) {
+    /**
+     * Ce constructeur permet de récupérer l'identifiant de la personne connectée grâce au jTextField de la classe Connexion
+     */
+        public PPE3(String co) {
         initComponents();   
         
         try {
@@ -70,8 +73,10 @@ public class PPE3 extends javax.swing.JFrame {
             System.out.println("Erreur de connexion à la base de donnée, veuillez rééssayer.");
         }
         
-        
-        
+        /**
+         * Création de models permettant de récupérer le contenu des jComboBox et d'y insérer les tuples voulus
+         */
+  
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBoxClient.getModel();
         DefaultComboBoxModel leModel2= (DefaultComboBoxModel) jComboBoxProduit.getModel();
         DefaultComboBoxModel leModel3 = (DefaultComboBoxModel) jComboBoxPersonnel.getModel();
@@ -81,12 +86,14 @@ public class PPE3 extends javax.swing.JFrame {
         leModelVente.addColumn("Prix");
         jTextFieldQte.setText("1");
         jComboBoxPersonnel.setVisible(false);
-        
+    /**
+     * Ces requetes SQL permettent ensuite d'insérer le contenu des tables voulus dans les jTable.
+     */    
            try{
                ResultSet lesTuples3 = DaoSIO.getInstance().requeteSelection("select * from personnel where identifiant = '" + jLabelEtat.getText() + "'");
             while (lesTuples3.next())
             {
-                CategorieCombo cPers = new CategorieCombo(lesTuples3.getString("id"), lesTuples3.getString("identifiant"));
+                ManipComboBox cPers = new ManipComboBox(lesTuples3.getString("id"), lesTuples3.getString("identifiant"));
                 leModel3.addElement(cPers);
             }
            }
@@ -103,11 +110,11 @@ public class PPE3 extends javax.swing.JFrame {
     
     
             while (lesTuples.next()) {
-                CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("nomClient"));
+                ManipComboBox cc = new ManipComboBox(lesTuples.getString("id"), lesTuples.getString("nomClient"));
                 leModel.addElement(cc);
             }
             while (lesTuples2.next()) {
-                CategorieCombo cp = new CategorieCombo(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"), lesTuples2.getFloat("prixProduit"));
+                ManipComboBox cp = new ManipComboBox(lesTuples2.getString("id"), lesTuples2.getString("nomproduit"), lesTuples2.getFloat("prixProduit"));
                 leModel2.addElement(cp);
             }
  
@@ -123,14 +130,6 @@ public class PPE3 extends javax.swing.JFrame {
     
     int connecte = 0;
     
-    public float getTotal ()
-    {      
-        float total = 0;
-        for (int i = 0; i < jTable4.getRowCount(); i++)
-           total =+ (float) jTable4.getValueAt( i, 2);
-        
-     return total;       
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -482,44 +481,25 @@ public class PPE3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean existsInTable(JTable table, Object[] entry) {
-
-    // Get row and column count
-    int rowCount = table.getRowCount();
-    int colCount = table.getColumnCount();
-
-    // Get Current Table Entry
-    String curEntry = "";
-    for (Object o : entry) {
-        String e = o.toString();
-        curEntry = curEntry + " " + e;
-    }
-
-    // Check against all entries
-    for (int i = 0; i < rowCount; i++) {
-        String rowEntry = "";
-        for (int j = 0; j < colCount; j++)
-            rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
-        if (rowEntry.equalsIgnoreCase(curEntry)) {
-            return true;
-        }
-    }
-    return false;
-}
+    
     
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
     
     float total = 0;
+    /**
+     * Boucle permettant de parcourir la table Vente et d'affecter toutes les valeurs de la colonne Prix à une variable
+     */
     for (int i = 0; i < jTable4.getRowCount(); i++)
-    total += (float) jTable4.getValueAt( i, 2);
-       
-        
+    total += (float) jTable4.getValueAt(i, 2);
+         
     
     Date d = new Date();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     
-    CategorieCombo cc = (CategorieCombo) jComboBoxClient.getSelectedItem();
-    CategorieCombo cp = (CategorieCombo) jComboBoxPersonnel.getSelectedItem();
+    ManipComboBox cc = (ManipComboBox) jComboBoxClient.getSelectedItem();
+    ManipComboBox cp = (ManipComboBox) jComboBoxPersonnel.getSelectedItem();
+    
+    
     
     Integer lesTuplesInsert = DaoSIO.getInstance().requeteAction("insert into vente (dateVente, chiffreAffaire, id_1, id_2) values ('" + formatter.format(d) + "', '" + total + "', '"+ cc.getId() +"' , '"+ cp.getId() +"')");            
     if (lesTuplesInsert == 0)
@@ -528,39 +508,71 @@ public class PPE3 extends javax.swing.JFrame {
     }
     else {
         JOptionPane.showMessageDialog(this, "Vente créée !");
-    }   
-           
-    
+    }
+    ResultSet lesTuplesGet = DaoSIO.getInstance().requeteSelection("select last_inserted_id() into lastid");
+        try {
+            if(lesTuplesGet.next())               
+            {
+                System.out.println("oui");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            for (int i = 0; i < jTable4.getRowCount(); i++)
+                {
+                String qte = jTable4.getValueAt(i,1).toString();
+                ManipComboBox cProd = (ManipComboBox) jTable4.getValueAt(i,0);
+                Integer lesTuplesContient = DaoSIO.getInstance().requeteAction("insert into contient values ('lastid','" + cProd.getId() + "','"+ qte +"')");
+            if (lesTuplesContient == 0)
+                {
+                JOptionPane.showMessageDialog(this, "Echec de la requête (contient).");
+                }
+            else {
+                JOptionPane.showMessageDialog(this, "Table OK");
+                }
+                } 
+  
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         String cd = jComboBoxClient.getSelectedItem().toString();
         String cp = jComboBoxProduit.getSelectedItem().toString();
-        CategorieCombo pp = (CategorieCombo) jComboBoxProduit.getSelectedItem();
+        ManipComboBox pp = (ManipComboBox) jComboBoxProduit.getSelectedItem();
         DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
         
-        try{
-
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit");
-
-
-            if (lesTuples.next())
-            leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
-
-        }
-        catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,"Erreur, l'exécution de la requête est un échec !!");
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                if(jTable4.getRowCount() > 0)
+                {   
+                    for (int i = 0; i < jTable4.getRowCount(); i++)
+                    {
+                    if (jTable4.getValueAt(i, 0).equals(cp))
+                    {
+                    int qte = Integer.valueOf(jTable4.getValueAt(i,1).toString());
+                    qte = qte + Integer.valueOf(jTextFieldQte.getText());
+                    jTable4.setValueAt(qte, i, 1); 
+                    }
+                    else {
+                    leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
+                    }
+                    }
+                }        
+                else         
+                {
+                leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
+                }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    /**
+     * Affiche la jDialog DetailProfil qui permet d'ajouter un profil à la table
+     */  
         DetailProfil profil = new DetailProfil(this, true);
         profil.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
+    /**
+     * Affiche la jDialog ModifProfil qui permet de modifier un profil existant dans la table
+     */
         if (jTable2.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
@@ -572,6 +584,9 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModifProfilActionPerformed
 
     private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
+    /**
+     * Insère dans la jTable les colonnes et les tuples de la table personnel
+     */
         DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
@@ -596,7 +611,9 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+        /**
+         * Affiche la jDialog ModifCli qui permet de modifier un client de la table
+         */
         if (jTable1.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
@@ -608,12 +625,17 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        /**
+         * Affiche la jDialog DetailCli qui permet d'ajouter un client dans la table
+         */
         DetailCli addCli = new DetailCli(this, true);
         addCli.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+    /**
+     * Insère dans la jTable les colonnes et les tuples de la table client
+     */    
         DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
@@ -638,6 +660,9 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
+    /**
+     * Affiche la jDialog qui permet de modifier un produit de la table
+     */    
         if (this.connecte != 0)
 
         {
@@ -656,12 +681,18 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModifProdActionPerformed
 
     private void jButtonAjouterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterProdActionPerformed
+    /**
+     * Affiche la jDialog qui permet d'ajouter un produit dans la table
+     */
+      
         DetailProd detail = new DetailProd(this, true);
         detail.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonAjouterProdActionPerformed
 
     private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
-
+    /**
+     * Insère dans la jTable les colonnes et les tuples de la table produit ainsi que les catégories correspondantes
+     */
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit p inner join categorie c on p.id_1 = c.id");
@@ -676,9 +707,7 @@ public class PPE3 extends javax.swing.JFrame {
             leModel.addColumn("Categorie");
 
             while (lesTuples.next()) {
-                //            Object[][] donnees = {
-                    //                {lesTuples.getString("id"), lesTuples.getString("nomClient"), lesTuples.getString("adresseClient"), lesTuples.getString("numClient")}
-                    //            };
+                
                 leModel.addRow(new Object[]{lesTuples.getString("id"), lesTuples.getString("nomproduit"), lesTuples.getString("stock"), lesTuples.getString("refproduit"),lesTuples.getString("prixProduit"), lesTuples.getString("populariteProduit") + "★", lesTuples.getString("nomcategorie")});
             }
 
@@ -692,6 +721,9 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAfficherProdActionPerformed
 
     private void jButtonDeleteProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteProdActionPerformed
+    /**
+     * Supprime la ligne sélectionnée dans la jTable Vente
+     */
     DefaultTableModel leModel= (DefaultTableModel) jTable4.getModel();
     Integer id = jTable4.getSelectedRow();
     if (jTable4.getSelectedRow() == -1)
@@ -699,11 +731,15 @@ public class PPE3 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
         }
         else
+        
         {
         leModel.removeRow(id);
         }
     }//GEN-LAST:event_jButtonDeleteProdActionPerformed
     
+    /**
+     * Toutes les méthodes suivantes permettent d'obtenir les valeurs des différentes lignes dans chaques tables pour les renvoyer dans le jDialog Modif correspondant aux tables.  
+     */
     public String getID(){
         Integer id = jTable1.getSelectedRow();
         return (String) jTable1.getValueAt(id,0);

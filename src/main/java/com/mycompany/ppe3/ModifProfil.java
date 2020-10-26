@@ -38,7 +38,7 @@ public ModifProfil(java.awt.Frame parent, boolean modal, String idProfil, String
            try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from profil");
             while (lesTuples.next()) {
-                CategorieCombo cc = new CategorieCombo(lesTuples.getString("id"), lesTuples.getString("libelle"));
+                ManipComboBox cc = new ManipComboBox(lesTuples.getString("id"), lesTuples.getString("libelle"));
                 leModel.addElement(cc);
             }
  
@@ -188,7 +188,7 @@ public ModifProfil(java.awt.Frame parent, boolean modal, String idProfil, String
     }//GEN-LAST:event_jTextFieldTelActionPerformed
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
-CategorieCombo cd = (CategorieCombo) jComboBoxProfil.getSelectedItem();
+ManipComboBox cd = (ManipComboBox) jComboBoxProfil.getSelectedItem();
     int id = Integer.parseInt(jTextFieldID.getText());
     Integer lesTuples = DaoSIO.getInstance().requeteAction("update personnel set identifiant = '" + jTextFieldIdent.getText() + "', nom = '" + jTextFieldNom.getText() + "', prenom= '" + jTextFieldPrenom.getText() + "', email = '" + jTextFieldEmail.getText() + "', tel = '" + jTextFieldTel.getText() + "', id_1 = '" + cd.getId() + "' where id = " + id + "");
     if (lesTuples == 0){
