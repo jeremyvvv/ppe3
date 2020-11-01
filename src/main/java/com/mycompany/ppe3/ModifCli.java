@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class ModifCli extends javax.swing.JDialog {
 
     /**
-     * Creates new form ModifCli
+     * Créé une jDialog qui permet de modifier le client sélectionné dans la jTable
      */
     public ModifCli(java.awt.Frame parent, boolean modal, String idClient, String nomClient, String adrClient, String numClient) {
         super(parent, modal);

@@ -6,7 +6,7 @@
 package com.mycompany.ppe3;
 
 /**
- * Cette classe permet de récupérer l'id, valeur ou prix de l'objet contenu dans une ComboBox
+ * Cette classe permet d'insérer un objet dans une combobox, puis de récupérer l'id, valeur ou prix de l'objet contenu dans cette ComboBox
  * @author j.vassant
  */
 public class ManipComboBox {

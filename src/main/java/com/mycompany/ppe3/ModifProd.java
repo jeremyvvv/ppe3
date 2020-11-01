@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class ModifProd extends javax.swing.JDialog {
 
     /**
-     * Creates new form ModifProd
+     * Créé un jDialog qui permet de modifier le produit sélectionné dans la jTable
      */
     
     public ModifProd(java.awt.Frame parent, boolean modal, String idProd, String nomProd, String stock, String ref, String prix) {

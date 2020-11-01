@@ -28,7 +28,7 @@ public class PPE3 extends javax.swing.JFrame {
 
     DaoSIO monDao = DaoSIO.getInstance();
     /**
-     * Creates new form PPE3
+     * Ouvre la jFrame permettant l'accès aux produits, clients, ventes et profils
      */
     public PPE3(){
         
@@ -39,7 +39,7 @@ public class PPE3 extends javax.swing.JFrame {
      */
         public PPE3(String co) {
         initComponents();   
-        
+        jLabelNoAccessProfil.setVisible(false);
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + co + "' ");
             if (lesTuples.next()) {
@@ -54,6 +54,8 @@ public class PPE3 extends javax.swing.JFrame {
 
                 jLabelEtat.setText(co);
                 jLabelEtatProfil.setText(lesTuples.getString("libelle"));
+                
+             
                 jLabelEtat.setVisible(true);
 
             } else {
@@ -72,7 +74,15 @@ public class PPE3 extends javax.swing.JFrame {
         else {
             System.out.println("Erreur de connexion à la base de donnée, veuillez rééssayer.");
         }
-        
+        if (jLabelEtatProfil.getText().equals("agent"))
+        {
+            jScrollPane2.setVisible(false);
+            jButtonAfficherProfil.setVisible(false);
+            jButtonModifProfil.setVisible(false);
+            jButtonAddProfil.setVisible(false);
+            jLabelNoAccessProfil.setVisible(true);
+        }
+                else {}
         /**
          * Création de models permettant de récupérer le contenu des jComboBox et d'y insérer les tuples voulus
          */
@@ -157,7 +167,8 @@ public class PPE3 extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jButtonAfficherProfil = new javax.swing.JButton();
         jButtonModifProfil = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonAddProfil = new javax.swing.JButton();
+        jLabelNoAccessProfil = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabelClient = new javax.swing.JLabel();
         jComboBoxClient = new javax.swing.JComboBox<>();
@@ -309,12 +320,15 @@ public class PPE3 extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Ajouter Profil");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddProfil.setText("Ajouter Profil");
+        jButtonAddProfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonAddProfilActionPerformed(evt);
             }
         });
+
+        jLabelNoAccessProfil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabelNoAccessProfil.setText("Veuillez vous connecter en tant qu'administrateur pour gérer le personnel.");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -325,25 +339,31 @@ public class PPE3 extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAfficherProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonModifProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAddProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelNoAccessProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelNoAccessProfil)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(50, 50, 50)
                         .addComponent(jButtonAfficherProfil)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModifProfil)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jButtonAddProfil)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Personnel", jPanel4);
@@ -509,20 +529,13 @@ public class PPE3 extends javax.swing.JFrame {
     else {
         JOptionPane.showMessageDialog(this, "Vente créée !");
     }
-    ResultSet lesTuplesGet = DaoSIO.getInstance().requeteSelection("select last_inserted_id() into lastid");
-        try {
-            if(lesTuplesGet.next())               
-            {
-                System.out.println("oui");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PPE3.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
             for (int i = 0; i < jTable4.getRowCount(); i++)
                 {
                 String qte = jTable4.getValueAt(i,1).toString();
                 ManipComboBox cProd = (ManipComboBox) jTable4.getValueAt(i,0);
-                Integer lesTuplesContient = DaoSIO.getInstance().requeteAction("insert into contient values ('lastid','" + cProd.getId() + "','"+ qte +"')");
+                Integer lesTuplesContient = DaoSIO.getInstance().requeteAction("select last_insert_id() into lastid"
+                        + "insert into contient values ('lastid','" + cProd.getId() + "','"+ qte +"')");
             if (lesTuplesContient == 0)
                 {
                 JOptionPane.showMessageDialog(this, "Echec de la requête (contient).");
@@ -531,48 +544,44 @@ public class PPE3 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Table OK");
                 }
                 } 
-  
+            DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        String cd = jComboBoxClient.getSelectedItem().toString();
+        
         String cp = jComboBoxProduit.getSelectedItem().toString();
         ManipComboBox pp = (ManipComboBox) jComboBoxProduit.getSelectedItem();
         DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
         
-                if(jTable4.getRowCount() > 0)
-                {   
-                    for (int i = 0; i < jTable4.getRowCount(); i++)
-                    {
-                    if (jTable4.getValueAt(i, 0).equals(cp))
-                    {
-                    int qte = Integer.valueOf(jTable4.getValueAt(i,1).toString());
-                    qte = qte + Integer.valueOf(jTextFieldQte.getText());
-                    jTable4.setValueAt(qte, i, 1); 
-                    }
-                    else {
+//                if(jTable4.getRowCount() > 0)
+//                {   
+//                    for (int i = 0; i < jTable4.getRowCount(); i++)
+//                    {
+//                    if (jTable4.getValueAt(i, 0).equals(cp))
+//                    {
+//                    int qte = Integer.valueOf(jTable4.getValueAt(i,1).toString());
+//                    qte = qte + Integer.valueOf(jTextFieldQte.getText());
+//                    jTable4.setValueAt(qte, i, 1); 
+//                    }
+//                    else {
                     leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
-                    }
-                    }
-                }        
-                else         
-                {
-                leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
-                }
+//                    }
+//                    }
+//                }        
+//                else         
+//                {
+//                leModel.addRow(new Object[]{cp, jTextFieldQte.getText(), pp.getPrix()});
+//                }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    /**
-     * Affiche la jDialog DetailProfil qui permet d'ajouter un profil à la table
-     */  
+    private void jButtonAddProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProfilActionPerformed
+     
         DetailProfil profil = new DetailProfil(this, true);
         profil.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonAddProfilActionPerformed
 
     private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
-    /**
-     * Affiche la jDialog ModifProfil qui permet de modifier un profil existant dans la table
-     */
+    
         if (jTable2.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
@@ -584,10 +593,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModifProfilActionPerformed
 
     private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
-    /**
-     * Insère dans la jTable les colonnes et les tuples de la table personnel
-     */
-        DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
             leModel.setColumnCount(0);
@@ -611,9 +617,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        /**
-         * Affiche la jDialog ModifCli qui permet de modifier un client de la table
-         */
+        
         if (jTable1.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
@@ -633,9 +637,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    /**
-     * Insère dans la jTable les colonnes et les tuples de la table client
-     */    
+       
         DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
@@ -660,9 +662,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
-    /**
-     * Affiche la jDialog qui permet de modifier un produit de la table
-     */    
+        
         if (this.connecte != 0)
 
         {
@@ -681,18 +681,12 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModifProdActionPerformed
 
     private void jButtonAjouterProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterProdActionPerformed
-    /**
-     * Affiche la jDialog qui permet d'ajouter un produit dans la table
-     */
-      
+  
         DetailProd detail = new DetailProd(this, true);
         detail.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonAjouterProdActionPerformed
 
     private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
-    /**
-     * Insère dans la jTable les colonnes et les tuples de la table produit ainsi que les catégories correspondantes
-     */
         DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit p inner join categorie c on p.id_1 = c.id");
@@ -844,11 +838,11 @@ public class PPE3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonAddProfil;
     private javax.swing.JButton jButtonAfficherProd;
     private javax.swing.JButton jButtonAfficherProfil;
     private javax.swing.JButton jButtonAjouterProd;
@@ -863,6 +857,7 @@ public class PPE3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCo;
     private javax.swing.JLabel jLabelEtat;
     private javax.swing.JLabel jLabelEtatProfil;
+    private javax.swing.JLabel jLabelNoAccessProfil;
     private javax.swing.JLabel jLabelProduit;
     private javax.swing.JLabel jLabelProfil;
     private javax.swing.JLabel jLabelQte;

@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class ModifProfil extends javax.swing.JDialog {
 
     /**
-     * Creates new form ModifProfil
+     * Créé une jDialog qui permet de modifier un profil sélectionné dans la jTable
      */
    
 public ModifProfil(java.awt.Frame parent, boolean modal, String idProfil, String ident, String nom, String prenom, String mail, String tel) {

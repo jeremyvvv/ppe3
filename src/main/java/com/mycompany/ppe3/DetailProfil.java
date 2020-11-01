@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class DetailProfil extends javax.swing.JDialog {
 
     /**
-     * Creates new form DetailProfil
+     * Créé une jDialog qui permet d'ajouter un nouveau profil dans la table personnel
      */
     public DetailProfil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
