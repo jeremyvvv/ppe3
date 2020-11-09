@@ -34,7 +34,7 @@
                           <Component id="jLabelPrenom" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelTel" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelProfil" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelmdp" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelMdp" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -72,7 +72,7 @@
               </Group>
               <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelmdp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelMdp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jPasswordFieldMdp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -174,7 +174,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelmdp">
+    <Component class="javax.swing.JLabel" name="jLabelMdp">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mot de passe"/>
       </Properties>

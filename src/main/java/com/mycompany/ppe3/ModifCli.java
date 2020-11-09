@@ -20,11 +20,11 @@ public class ModifCli extends javax.swing.JDialog {
     public ModifCli(java.awt.Frame parent, boolean modal, String idClient, String nomClient, String adrClient, String numClient) {
         super(parent, modal);
         initComponents();
-        jTextField1.setText(nomClient);
-        jTextField2.setText(adrClient);
-        jTextField3.setText(numClient);
-        jTextField4.setText(idClient);
-        jTextField4.setEnabled(false);
+        jTextFieldNom.setText(nomClient);
+        jTextFieldAdr.setText(adrClient);
+        jTextFieldNum.setText(numClient);
+        jTextFieldId.setText(idClient);
+        jTextFieldId.setEnabled(false);
         
 
 }
@@ -42,41 +42,41 @@ public class ModifCli extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
+        jTextFieldNom = new javax.swing.JTextField();
+        jButtonValider = new javax.swing.JButton();
+        jTextFieldAdr = new javax.swing.JTextField();
+        jTextFieldNum = new javax.swing.JTextField();
+        jLabelNom = new javax.swing.JLabel();
+        jLabelAdr = new javax.swing.JLabel();
+        jLabelNum = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
+        jLabelId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Modification Client");
+        jLabelTitre.setText("Modification Client");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldNomActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Valider");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonValider.setText("Valider");
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonValiderActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Nom");
+        jLabelNom.setText("Nom");
 
-        jLabel3.setText("Adresse");
+        jLabelAdr.setText("Adresse");
 
-        jLabel4.setText("Numéro");
+        jLabelNum.setText("Numéro");
 
-        jLabel5.setText("ID");
+        jLabelId.setText("ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,67 +86,67 @@ public class ModifCli extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonValider))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabelAdr)
+                            .addComponent(jLabelNom)
+                            .addComponent(jLabelNum)
+                            .addComponent(jLabelId))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelTitre)
+                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(jTextFieldAdr)
+                            .addComponent(jTextFieldNum)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelId))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNom))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldAdr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jTextFieldNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNum))
                         .addGap(26, 26, 26)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel3))
+                        .addComponent(jButtonValider))
+                    .addComponent(jLabelAdr))
                 .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-int id = Integer.parseInt(jTextField4.getText());
-Integer lesTuples = DaoSIO.getInstance().requeteAction("update client set nomClient = '" + jTextField1.getText() + "', adresseClient = '" + jTextField2.getText() + "', numClient = '" + jTextField3.getText() + "' where id = " + id + "");
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+int id = Integer.parseInt(jTextFieldId.getText());
+Integer lesTuples = DaoSIO.getInstance().requeteAction("update client set nomClient = '" + jTextFieldNom.getText() + "', adresseClient = '" + jTextFieldAdr.getText() + "', numClient = '" + jTextFieldNum.getText() + "' where id = " + id + "");
 if (lesTuples == 0){
     JOptionPane.showMessageDialog(this, "Echec de la requête");
 }
 else {
     JOptionPane.showMessageDialog(this, "Requête réussie.");
 }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonValiderActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldNomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,15 +191,15 @@ else {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton jButtonValider;
+    private javax.swing.JLabel jLabelAdr;
+    private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelNom;
+    private javax.swing.JLabel jLabelNum;
+    private javax.swing.JLabel jLabelTitre;
+    private javax.swing.JTextField jTextFieldAdr;
+    private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldNom;
+    private javax.swing.JTextField jTextFieldNum;
     // End of variables declaration//GEN-END:variables
 }

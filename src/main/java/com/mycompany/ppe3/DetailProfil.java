@@ -62,7 +62,7 @@ public class DetailProfil extends javax.swing.JDialog {
         jButtonValider = new javax.swing.JButton();
         jLabelTel = new javax.swing.JLabel();
         jTextFieldTel = new javax.swing.JTextField();
-        jLabelmdp = new javax.swing.JLabel();
+        jLabelMdp = new javax.swing.JLabel();
         jPasswordFieldMdp = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -94,7 +94,7 @@ public class DetailProfil extends javax.swing.JDialog {
             }
         });
 
-        jLabelmdp.setText("Mot de passe");
+        jLabelMdp.setText("Mot de passe");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +111,7 @@ public class DetailProfil extends javax.swing.JDialog {
                             .addComponent(jLabelPrenom)
                             .addComponent(jLabelTel)
                             .addComponent(jLabelProfil)
-                            .addComponent(jLabelmdp))
+                            .addComponent(jLabelMdp))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldLibelleID)
@@ -140,7 +140,7 @@ public class DetailProfil extends javax.swing.JDialog {
                     .addComponent(jTextFieldLibelleID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelmdp)
+                    .addComponent(jLabelMdp)
                     .addComponent(jPasswordFieldMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -235,12 +235,12 @@ public class DetailProfil extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxProfil;
     private javax.swing.JLabel jLabelLibelleID;
     private javax.swing.JLabel jLabelMail;
+    private javax.swing.JLabel jLabelMdp;
     private javax.swing.JLabel jLabelNom;
     private javax.swing.JLabel jLabelPrenom;
     private javax.swing.JLabel jLabelProfil;
     private javax.swing.JLabel jLabelTel;
     private javax.swing.JLabel jLabelTitre;
-    private javax.swing.JLabel jLabelmdp;
     private javax.swing.JPasswordField jPasswordFieldMdp;
     private javax.swing.JTextField jTextFieldLibelleID;
     private javax.swing.JTextField jTextFieldMail;

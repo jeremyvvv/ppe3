@@ -90,7 +90,7 @@ public class PPE3 extends javax.swing.JFrame {
         DefaultComboBoxModel leModel= (DefaultComboBoxModel)jComboBoxClient.getModel();
         DefaultComboBoxModel leModel2= (DefaultComboBoxModel) jComboBoxProduit.getModel();
         DefaultComboBoxModel leModel3 = (DefaultComboBoxModel) jComboBoxPersonnel.getModel();
-        DefaultTableModel leModelVente= (DefaultTableModel) jTable4.getModel();
+        DefaultTableModel leModelVente= (DefaultTableModel) jTableVente.getModel();
         leModelVente.addColumn("Produit");
         leModelVente.addColumn("Stock");
         leModelVente.addColumn("Prix");
@@ -150,26 +150,26 @@ public class PPE3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelProd = new javax.swing.JPanel();
         jButtonAfficherProd = new javax.swing.JButton();
         jButtonAjouterProd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableProd = new javax.swing.JTable();
         jButtonModifProd = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jPanelCli = new javax.swing.JPanel();
+        jButtonAfficherCli = new javax.swing.JButton();
+        jButtonAjouterCli = new javax.swing.JButton();
+        jButtonModifCli = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        jTableCli = new javax.swing.JTable();
+        jPanelPersonnel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTablePersonnel = new javax.swing.JTable();
         jButtonAfficherProfil = new javax.swing.JButton();
         jButtonModifProfil = new javax.swing.JButton();
         jButtonAddProfil = new javax.swing.JButton();
         jLabelNoAccessProfil = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelVente = new javax.swing.JPanel();
         jLabelClient = new javax.swing.JLabel();
         jComboBoxClient = new javax.swing.JComboBox<>();
         jLabelProduit = new javax.swing.JLabel();
@@ -178,7 +178,7 @@ public class PPE3 extends javax.swing.JFrame {
         jLabelQte = new javax.swing.JLabel();
         jButtonAdd = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        jTableVente = new javax.swing.JTable();
         jButtonDeleteProd = new javax.swing.JButton();
         jButtonValider = new javax.swing.JButton();
         jComboBoxPersonnel = new javax.swing.JComboBox<>();
@@ -203,8 +203,8 @@ public class PPE3 extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new DefaultTableModel());
-        jScrollPane1.setViewportView(jTable2);
+        jTableProd.setModel(new DefaultTableModel());
+        jScrollPane1.setViewportView(jTableProd);
 
         jButtonModifProd.setText("Modifier sélection");
         jButtonModifProd.addActionListener(new java.awt.event.ActionListener() {
@@ -213,13 +213,13 @@ public class PPE3 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelProdLayout = new javax.swing.GroupLayout(jPanelProd);
+        jPanelProd.setLayout(jPanelProdLayout);
+        jPanelProdLayout.setHorizontalGroup(
+            jPanelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAfficherProd, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                     .addComponent(jButtonAjouterProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonModifProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -227,84 +227,84 @@ public class PPE3 extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelProdLayout.setVerticalGroup(
+            jPanelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProdLayout.createSequentialGroup()
+                .addGroup(jPanelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelProdLayout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(jButtonAfficherProd)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModifProd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonAjouterProd))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanelProdLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Produits", jPanel2);
+        jTabbedPane1.addTab("Produits", jPanelProd);
 
-        jButton5.setText("Afficher clients");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAfficherCli.setText("Afficher clients");
+        jButtonAfficherCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonAfficherCliActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Ajouter Client");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAjouterCli.setText("Ajouter Client");
+        jButtonAjouterCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonAjouterCliActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Modifier sélection");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModifCli.setText("Modifier sélection");
+        jButtonModifCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonModifCliActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new DefaultTableModel());
-        jScrollPane3.setViewportView(jTable1);
+        jTableCli.setModel(new DefaultTableModel());
+        jScrollPane3.setViewportView(jTableCli);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelCliLayout = new javax.swing.GroupLayout(jPanelCli);
+        jPanelCli.setLayout(jPanelCliLayout);
+        jPanelCliLayout.setHorizontalGroup(
+            jPanelCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCliLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAfficherCli, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(jButtonAjouterCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonModifCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelCliLayout.setVerticalGroup(
+            jPanelCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCliLayout.createSequentialGroup()
+                .addGroup(jPanelCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCliLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jButton5)
+                        .addComponent(jButtonAfficherCli)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton8)
+                        .addComponent(jButtonModifCli)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonAjouterCli))
+                    .addGroup(jPanelCliLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Clients", jPanel3);
+        jTabbedPane1.addTab("Clients", jPanelCli);
 
-        jTable3.setModel(new DefaultTableModel());
-        jScrollPane2.setViewportView(jTable3);
+        jTablePersonnel.setModel(new DefaultTableModel());
+        jScrollPane2.setViewportView(jTablePersonnel);
 
         jButtonAfficherProfil.setText("Afficher Profil");
         jButtonAfficherProfil.addActionListener(new java.awt.event.ActionListener() {
@@ -330,33 +330,33 @@ public class PPE3 extends javax.swing.JFrame {
         jLabelNoAccessProfil.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNoAccessProfil.setText("Veuillez vous connecter en tant qu'administrateur pour gérer le personnel.");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelPersonnelLayout = new javax.swing.GroupLayout(jPanelPersonnel);
+        jPanelPersonnel.setLayout(jPanelPersonnelLayout);
+        jPanelPersonnelLayout.setHorizontalGroup(
+            jPanelPersonnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPersonnelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelPersonnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAfficherProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonModifProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                     .addComponent(jButtonAddProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPersonnelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelNoAccessProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanelPersonnelLayout.setVerticalGroup(
+            jPanelPersonnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPersonnelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelNoAccessProfil)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanelPersonnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPersonnelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(jPanelPersonnelLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jButtonAfficherProfil)
                         .addGap(18, 18, 18)
@@ -366,7 +366,7 @@ public class PPE3 extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Personnel", jPanel4);
+        jTabbedPane1.addTab("Personnel", jPanelPersonnel);
 
         jLabelClient.setText("Client");
 
@@ -381,8 +381,8 @@ public class PPE3 extends javax.swing.JFrame {
             }
         });
 
-        jTable4.setModel(new DefaultTableModel());
-        jScrollPane4.setViewportView(jTable4);
+        jTableVente.setModel(new DefaultTableModel());
+        jScrollPane4.setViewportView(jTableVente);
 
         jButtonDeleteProd.setText("-");
         jButtonDeleteProd.addActionListener(new java.awt.event.ActionListener() {
@@ -398,21 +398,21 @@ public class PPE3 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelVenteLayout = new javax.swing.GroupLayout(jPanelVente);
+        jPanelVente.setLayout(jPanelVenteLayout);
+        jPanelVenteLayout.setHorizontalGroup(
+            jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVenteLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelVenteLayout.createSequentialGroup()
                         .addComponent(jLabelClient)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(153, 153, 153)
                         .addComponent(jComboBoxPersonnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelVenteLayout.createSequentialGroup()
                             .addComponent(jLabelProduit)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,19 +429,19 @@ public class PPE3 extends javax.swing.JFrame {
                 .addComponent(jButtonValider)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanelVenteLayout.setVerticalGroup(
+            jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVenteLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonValider)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelVenteLayout.createSequentialGroup()
+                        .addGroup(jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelClient)
                             .addComponent(jComboBoxPersonnel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelVenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBoxProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldQte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelProduit)
@@ -453,7 +453,7 @@ public class PPE3 extends javax.swing.JFrame {
                 .addGap(0, 23, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Vente", jPanel5);
+        jTabbedPane1.addTab("Vente", jPanelVente);
 
         jLabelEtat.setText("Etat connexion");
 
@@ -509,8 +509,8 @@ public class PPE3 extends javax.swing.JFrame {
     /**
      * Boucle permettant de parcourir la table Vente et d'affecter toutes les valeurs de la colonne Prix à une variable
      */
-    for (int i = 0; i < jTable4.getRowCount(); i++)
-    total += (float) jTable4.getValueAt(i, 2);
+    for (int i = 0; i < jTableVente.getRowCount(); i++)
+    total += (float) jTableVente.getValueAt(i, 2);
          
     
     Date d = new Date();
@@ -530,10 +530,10 @@ public class PPE3 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Vente créée !");
     }
     
-            for (int i = 0; i < jTable4.getRowCount(); i++)
+            for (int i = 0; i < jTableVente.getRowCount(); i++)
                 {
-                String qte = jTable4.getValueAt(i,1).toString();
-                ManipComboBox cProd = (ManipComboBox) jTable4.getValueAt(i,0);
+                String qte = jTableVente.getValueAt(i,1).toString();
+                ManipComboBox cProd = (ManipComboBox) jTableVente.getValueAt(i,0);
                 Integer lesTuplesContient = DaoSIO.getInstance().requeteAction("select last_insert_id() into lastid"
                         + "insert into contient values ('lastid','" + cProd.getId() + "','"+ qte +"')");
             if (lesTuplesContient == 0)
@@ -544,14 +544,14 @@ public class PPE3 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Table OK");
                 }
                 } 
-            DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
+            DefaultTableModel leModel = (DefaultTableModel) jTableVente.getModel();
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         
         String cp = jComboBoxProduit.getSelectedItem().toString();
         ManipComboBox pp = (ManipComboBox) jComboBoxProduit.getSelectedItem();
-        DefaultTableModel leModel = (DefaultTableModel) jTable4.getModel();
+        DefaultTableModel leModel = (DefaultTableModel) jTableVente.getModel();
         
 //                if(jTable4.getRowCount() > 0)
 //                {   
@@ -582,7 +582,7 @@ public class PPE3 extends javax.swing.JFrame {
 
     private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
     
-        if (jTable2.getSelectedRow() == -1)
+        if (jTableProd.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
         }
@@ -593,7 +593,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModifProfilActionPerformed
 
     private void jButtonAfficherProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProfilActionPerformed
-            DefaultTableModel leModel= (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel leModel= (DefaultTableModel) jTablePersonnel.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner join profil pr on p.id_1 = pr.id");
             leModel.setColumnCount(0);
@@ -616,9 +616,9 @@ public class PPE3 extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAfficherProfilActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButtonModifCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifCliActionPerformed
         
-        if (jTable1.getSelectedRow() == -1)
+        if (jTableCli.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
         }
@@ -626,19 +626,19 @@ public class PPE3 extends javax.swing.JFrame {
             ModifCli modif = new ModifCli (this, true, this.getID(), this.getCli(), this.getAdr(), this.getNum());
             modif.setVisible(true);
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonModifCliActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButtonAjouterCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterCliActionPerformed
         /**
          * Affiche la jDialog DetailCli qui permet d'ajouter un client dans la table
          */
         DetailCli addCli = new DetailCli(this, true);
         addCli.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButtonAjouterCliActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonAfficherCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherCliActionPerformed
        
-        DefaultTableModel leModel= (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel leModel= (DefaultTableModel) jTableCli.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from client");
             leModel.setColumnCount(0);
@@ -659,14 +659,14 @@ public class PPE3 extends javax.swing.JFrame {
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonAfficherCliActionPerformed
 
     private void jButtonModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProdActionPerformed
         
         if (this.connecte != 0)
 
         {
-            if (jTable2.getSelectedRow() == -1)
+            if (jTableProd.getSelectedRow() == -1)
             {
                 JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
             }
@@ -687,7 +687,7 @@ public class PPE3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAjouterProdActionPerformed
 
     private void jButtonAfficherProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficherProdActionPerformed
-        DefaultTableModel leModel= (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel leModel= (DefaultTableModel) jTableProd.getModel();
         try {
             ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from produit p inner join categorie c on p.id_1 = c.id");
             leModel.setColumnCount(0);
@@ -718,9 +718,9 @@ public class PPE3 extends javax.swing.JFrame {
     /**
      * Supprime la ligne sélectionnée dans la jTable Vente
      */
-    DefaultTableModel leModel= (DefaultTableModel) jTable4.getModel();
-    Integer id = jTable4.getSelectedRow();
-    if (jTable4.getSelectedRow() == -1)
+    DefaultTableModel leModel= (DefaultTableModel) jTableVente.getModel();
+    Integer id = jTableVente.getSelectedRow();
+    if (jTableVente.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
         }
@@ -735,68 +735,68 @@ public class PPE3 extends javax.swing.JFrame {
      * Toutes les méthodes suivantes permettent d'obtenir les valeurs des différentes lignes dans chaques tables pour les renvoyer dans le jDialog Modif correspondant aux tables.  
      */
     public String getID(){
-        Integer id = jTable1.getSelectedRow();
-        return (String) jTable1.getValueAt(id,0);
+        Integer id = jTableCli.getSelectedRow();
+        return (String) jTableCli.getValueAt(id,0);
     }
     
     public String getCli(){
-    Integer nom = jTable1.getSelectedRow();  
-    return (String) jTable1.getValueAt(nom,1);
+    Integer nom = jTableCli.getSelectedRow();  
+    return (String) jTableCli.getValueAt(nom,1);
 }
     public String getAdr(){
-    Integer adr = jTable1.getSelectedRow();
-    return (String) jTable1.getValueAt(adr,2);
+    Integer adr = jTableCli.getSelectedRow();
+    return (String) jTableCli.getValueAt(adr,2);
 }
     public String getNum(){
-    Integer num = jTable1.getSelectedRow();
-    return (String) jTable1.getValueAt(num,3);
+    Integer num = jTableCli.getSelectedRow();
+    return (String) jTableCli.getValueAt(num,3);
 }
     public String getIDp(){
-        Integer id = jTable2.getSelectedRow();
-        return (String) jTable2.getValueAt(id, 0);
+        Integer id = jTableProd.getSelectedRow();
+        return (String) jTableProd.getValueAt(id, 0);
     }
    
     public String getProd(){
-        Integer nom = jTable2.getSelectedRow();
-        return (String) jTable2.getValueAt(nom, 1);
+        Integer nom = jTableProd.getSelectedRow();
+        return (String) jTableProd.getValueAt(nom, 1);
     }
     public String getStock(){
-        Integer stock = jTable2.getSelectedRow();
-        return (String) jTable2.getValueAt(stock, 2);
+        Integer stock = jTableProd.getSelectedRow();
+        return (String) jTableProd.getValueAt(stock, 2);
     }
     public String getRef(){
-        Integer ref = jTable2.getSelectedRow();
-        return (String) jTable2.getValueAt (ref, 3);
+        Integer ref = jTableProd.getSelectedRow();
+        return (String) jTableProd.getValueAt (ref, 3);
     }
     public String getPrix(){
-        Integer prix = jTable2.getSelectedRow();
-        return (String) jTable2.getValueAt(prix, 4);
+        Integer prix = jTableProd.getSelectedRow();
+        return (String) jTableProd.getValueAt(prix, 4);
     }
     
     public String getIDpr(){
-        Integer id = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt(id, 0);
+        Integer id = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt(id, 0);
     }
    
     public String getIdent(){
-        Integer ident = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt(ident, 1);
+        Integer ident = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt(ident, 1);
     }
     public String getNom(){
-        Integer nom = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt(nom, 2);
+        Integer nom = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt(nom, 2);
     }
     public String getPrenom(){
-        Integer prenom = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt (prenom, 3);
+        Integer prenom = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt (prenom, 3);
     }
     public String getMail(){
-        Integer mail = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt (mail, 4);
+        Integer mail = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt (mail, 4);
     }
     public String getTel(){
-        Integer tel = jTable3.getSelectedRow();
-        return (String) jTable3.getValueAt (tel, 5);
+        Integer tel = jTablePersonnel.getSelectedRow();
+        return (String) jTablePersonnel.getValueAt (tel, 5);
     }
        
     
@@ -838,15 +838,15 @@ public class PPE3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonAddProfil;
+    private javax.swing.JButton jButtonAfficherCli;
     private javax.swing.JButton jButtonAfficherProd;
     private javax.swing.JButton jButtonAfficherProfil;
+    private javax.swing.JButton jButtonAjouterCli;
     private javax.swing.JButton jButtonAjouterProd;
     private javax.swing.JButton jButtonDeleteProd;
+    private javax.swing.JButton jButtonModifCli;
     private javax.swing.JButton jButtonModifProd;
     private javax.swing.JButton jButtonModifProfil;
     private javax.swing.JButton jButtonValider;
@@ -861,19 +861,19 @@ public class PPE3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelProduit;
     private javax.swing.JLabel jLabelProfil;
     private javax.swing.JLabel jLabelQte;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelCli;
+    private javax.swing.JPanel jPanelPersonnel;
+    private javax.swing.JPanel jPanelProd;
+    private javax.swing.JPanel jPanelVente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTableCli;
+    private javax.swing.JTable jTablePersonnel;
+    private javax.swing.JTable jTableProd;
+    private javax.swing.JTable jTableVente;
     private javax.swing.JTextField jTextFieldQte;
     // End of variables declaration//GEN-END:variables
 }
