@@ -140,7 +140,7 @@ public class Connexion extends javax.swing.JFrame {
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
         try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + jTextFieldId.getText() + "' and mdp = '" + jPasswordFieldMdp.getText() +"' ");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=profil.id where identifiant = '" + jTextFieldId.getText() + "' and mdp = '" + jPasswordFieldMdp.getText() +"' ");
             if (lesTuples.next()) {
                 int id = lesTuples.getInt("id_1");
 

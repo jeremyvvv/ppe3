@@ -41,7 +41,7 @@ public class PPE3 extends javax.swing.JFrame {
         initComponents();   
         jLabelNoAccessProfil.setVisible(false);
         try {
-            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=Profil.id where identifiant = '" + co + "' ");
+            ResultSet lesTuples = DaoSIO.getInstance().requeteSelection("select * from personnel p inner Join profil on p.id_1=profil.id where identifiant = '" + co + "' ");
             if (lesTuples.next()) {
                 int id = lesTuples.getInt("id_1");
 
@@ -582,7 +582,7 @@ public class PPE3 extends javax.swing.JFrame {
 
     private void jButtonModifProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifProfilActionPerformed
     
-        if (jTableProd.getSelectedRow() == -1)
+        if (jTablePersonnel.getSelectedRow() == -1)
         {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne");
         }
